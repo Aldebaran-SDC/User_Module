@@ -45,3 +45,17 @@ module.exports.incrementFollower = (req, res) => {
     res.sendStatus(200);
   });
 };
+
+module.exports.addUser = (req, res) => {
+  db.addUser(req.body, (err) => {
+    if (err) {
+      res.status(500).send('ERROR: unable to create user');
+    } else {
+      res.status(201).send('SUCCESS! User was created');
+    };
+  });
+};
+
+
+
+}
