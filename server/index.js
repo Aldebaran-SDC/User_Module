@@ -16,8 +16,14 @@ app.get('/getUserByName/:username', c.getUserByName);
 
 app.get('/users', c.getAllUsers);
 
+app.post('/adduser', c.addUser);
+
 app.patch('/decrementFollowers/:username', c.decrementFollower);
 
 app.patch('/incrementFollowers/:username', c.incrementFollower);
+
+app.put('/updateuser/:id', c.updateUser);
+
+app.delete('/deleteuser/:id', c.deleteUser);
 
 module.exports = app;

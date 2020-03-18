@@ -69,10 +69,20 @@ const incrementFollowers = (username, callback) => {
   User.findOneAndUpdate({ name: username }, { $inc: { follower_count: 1 } }).exec(callback);
 };
 
+const updateUser = (ID, callback) => {
+  User.findOneAndUpdate({ id: ID}, {name: 'Updated'}).exec(callback);
+};
+
+const deleteUser = (ID, callback) => {
+  User.deleteOne({id: ID}).exec(callback);
+}
+
 module.exports.addUser = addUser;
 module.exports.getUserById = getUserById;
 module.exports.decrementFollowers = decrementFollowers;
 module.exports.incrementFollowers = incrementFollowers;
 module.exports.getAllUsers = getAllUsers;
 module.exports.getUserByName = getUserByName;
+module.exports.updateUser = updateUser;
+module.exports.deleteUser = deleteUser;
 module.exports.User = User;

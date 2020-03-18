@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest --detectOpenHandles",
     "build": "webpack -w",
-    "start": "NODE_ENV=development nodemon server/start.js",
+    "start": "nodemon server/start.js",
     "start:prod": "NODE_ENV=production nodemon server/start.js",
     "seed": "node database/seed.js"
   },

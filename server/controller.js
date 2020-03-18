@@ -50,12 +50,27 @@ module.exports.addUser = (req, res) => {
   db.addUser(req.body, (err) => {
     if (err) {
       res.status(500).send('ERROR: unable to create user');
-    } else {
+    }
       res.status(201).send('SUCCESS! User was created');
-    };
   });
 };
 
+module.exports.updateUser = (req, res) => {
+  db.updateUser({ _id: req.params.id }, req.body, (err) => {
+    if (err) {
+      res.status(500).send('ERROR: unable to update user');
+    }
+      res.status(201).send('SUCCESS! User was updated');
+  });
+};
 
-
+module.exports.deleteUser = (req, res) => {
+  db.deleteUser({ _id: req.params.id})
+  .then((result) => {
+    res.send(result);
+  })
+  .catch((error) => {
+    res.status(404).send('ERROR: cound not delete user')
+  })
 }
+
