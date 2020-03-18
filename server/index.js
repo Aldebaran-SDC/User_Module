@@ -22,7 +22,7 @@ app.patch('/decrementFollowers/:username', c.decrementFollower);
 
 app.patch('/incrementFollowers/:username', c.incrementFollower);
 
-app.put('/updateuser/:id', c.updateUser);
+app.patch('/updateuser/:id', c.updateUser);
 
 app.delete('/deleteuser/:id', c.deleteUser);
 
