@@ -1,36 +1,10 @@
-const mongoose = require('mongoose');
-
-const dotenv = require('dotenv');
-
-dotenv.config({
-  path: './.env',
-});
-
-
-// const MongoClient = require('mongodb').MongoClient;
-// const uri = "mongodb+srv://Shain:G1mm3m0ng0@cluster0-xgt6f.mongodb.net/test1?retryWrites=true&w=majority";
-// const client = new MongoClient(uri, { useNewUrlParser: true });
-// client.connect(err => {
-
-//   if (err) {
-//     console.log(err);
-//   } else { console.log('connected'); }
-//   const collection = client.db("test1").collection("devices");
-//   // perform actions on the collection object
-//   //client.close();
-// });
+var nano = require('nano');
+var async = require('async');
+var couch = require('./couchdb');
 
 
 
-mongoose.connect(process.env.MONGO_URI, {
-  useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false,
-}, (err) => {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log('connected to db');
-  }
-});
+
 
 const userSchema = mongoose.Schema({
   id: Number,
@@ -50,9 +24,7 @@ const addUser = (obj, callback) => {
 }
 
 const getUserById = (ID, callback) => {
-  const simID = Math.ceil(ID / 100000);
-  console.log('sim ID:', simID);
-  User.findOne({ id: Math.floor(Math.random() * (100 - 1)) + 1 }).exec(callback);
+  User.findOne({ id: ID }).exec(callback);
 };
 
 const getUserByName = (username, callback) => {

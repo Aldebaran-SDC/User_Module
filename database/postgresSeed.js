@@ -5,8 +5,11 @@ const argv = require('yargs').argv
 const lines = argv.lines || 1000000
 const filename = argv.output || 'users.csv'
 const stream = fs.createWriteStream(filename)
+const counter = 1;
 
 const createUser = (i) => {
+  const id = counter;
+  counter++;
   const handle = faker.name.findName();
   const name = faker.name.findName();
   const image_url = `http://d2tlnaqrf4t9d7.cloudfront.net/UserId+photos+for+S3/userId${i}.jpeg`;
@@ -14,7 +17,7 @@ const createUser = (i) => {
   const follower_count = faker.random.number(2000);
   const join_date = faker.date.past(10, '2020-01-01');
 
-  return `${handle},${name},${image_url},${track_count},${follower_count},${join_date}\n`
+  return `${id},${handle},${name},${image_url},${track_count},${follower_count},${join_date}\n`
 };
 
 const startWriting = (writeStream, encoding, done) => {
@@ -44,7 +47,7 @@ const startWriting = (writeStream, encoding, done) => {
 };
 
 //write our `header` line before we invoke the loop
-stream.write(`handle,name,image_url,track_count,follower_count,join_date\n`, 'utf-8')
+stream.write(`id,handle,name,image_url,track_count,follower_count,join_date\n`, 'utf-8')
 //invoke startWriting and pass callback
 startWriting(stream, 'utf-8', () => {
   stream.end()
